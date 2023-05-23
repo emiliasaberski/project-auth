@@ -13,6 +13,7 @@ mongoose.Promise = Promise;
 // PORT=9000 npm start
 const port = process.env.PORT || 8080;
 const app = express();
+const listEndpoints = require('express-list-endpoints')
 
 // Add middlewares to enable cors and json body parsing
 app.use(cors());
@@ -20,7 +21,7 @@ app.use(express.json());
 
 // Start defining your routes here
 app.get("/", (req, res) => {
-  res.send("Hello Technigo!");
+  res.json(listEndpoints(app));
 });
 
 const { Schema } = mongoose;
@@ -50,7 +51,7 @@ app.post("/register", async (req, res) => {
     if (password.length < 5) {
       res.status(400).json({
         success: false,
-        response: "password must be at least 5 characters long"
+        response: "Password must be at least 5 characters long"
       })
     } else {
       const newUser = await new User({ username: username, password: bcrypt.hashSync(password, salt)}).save()
@@ -65,7 +66,8 @@ app.post("/register", async (req, res) => {
   } catch (e) {
     res.status(400).json({
       success: false,
-      response: e
+      response: e,
+        message: "User already exist"
     })
   }
 })
@@ -98,28 +100,29 @@ app.post("/login", async (req, res) => {
   }
 })
 
-/*
 app.delete("/user", async (req, res) => {
-  const { username } = req.body
+  const { _id } = req.body
   try {
-    const user = await User.findOne({username})
-    res.status(200).json({
-      success: true,
-      response: {
-        username: user.username,
-        id: user._id,
-        accessToken: user.accessToken
-      }
-    })
-  }
-  catch (e) {
+    const user = await User.findOneAndDelete({_id})
+    if (user) {
+      res.status(200).json({
+        success: true,
+        response: "User deleted successfully."
+      })
+    } else {
+      res.status(404).json({
+        success: false,
+        response: "User not found."
+      })
+    }
+  } catch (e) {
     res.status(500).json({
       success: false,
       response: e
     })
   }
 })
-*/
+
 // Start the server
 app.listen(port, () => {
   console.log(`Server running on http://localhost:${port}`);
