@@ -123,6 +123,65 @@ app.delete("/user", async (req, res) => {
   }
 })
 
+const ThoughtsSchema = new mongoose.Schema ({
+  message: {
+    type: String,
+    required: true,
+    minlength: 5,
+    maxlength: 500
+  },
+  hearts: {
+    type: Number,
+    default: 0
+  },
+  createdAt: {
+    type: Date,
+    default: () => new Date()
+  },
+  user: {
+    type: String,
+    required: true
+  }
+})
+
+const Thoughts = mongoose.model("Thoughts", ThoughtsSchema)
+
+const authenticateUser = async (req, res, next) => {
+  const accessToken = req.header("Authorization")
+  try {
+    const user = await User.findOne({accessToken: accessToken})
+    if (user) {
+      next()
+    } else {
+      res.status(401).json({
+        success: false,
+        response: "Please login"
+      })
+    }
+  } catch (e) {
+    res.status(500).json({
+      success: false,
+      response: e
+    })
+  }
+}
+
+app.get("/thoughts", authenticateUser)
+app.get("/thoughts", async (req, res) => {
+  const thoughts = await Thoughts.find({});
+  res.status(200).json({success: true, response: thoughts})
+})
+
+app.post("/thoughts", authenticateUser)
+app.post("/thoughts", async (req, res) => {
+  const { message, username } = req.body
+  const accessToken = req.header("Authorization")
+  const user = await User.findOne({accessToken: accessToken})
+
+  const thoughts = await new Thoughts({message: message, user: user._id}).save()
+  res.status(201).json({success: true, response: thoughts, username})
+})
+
 // Start the server
 app.listen(port, () => {
   console.log(`Server running on http://localhost:${port}`);
