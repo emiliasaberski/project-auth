@@ -168,7 +168,9 @@ const authenticateUser = async (req, res, next) => {
 
 app.get("/thoughts", authenticateUser)
 app.get("/thoughts", async (req, res) => {
-  const thoughts = await Thoughts.find({});
+  const accessToken = req.header("Authorization");
+  const user = await User.findOne({accessToken: accessToken});
+  const thoughts = await Thoughts.find({user: user._id});
   res.status(200).json({success: true, response: thoughts})
 })
 
@@ -179,7 +181,7 @@ app.post("/thoughts", async (req, res) => {
   const user = await User.findOne({accessToken: accessToken})
 
   const thoughts = await new Thoughts({message: message, user: user._id}).save()
-  res.status(201).json({success: true, response: thoughts, username})
+  res.status(200).json({success: true, response: thoughts, username})
 })
 
 // Start the server
