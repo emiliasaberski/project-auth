@@ -26,7 +26,7 @@ const Main = () => {
                 }
         }
         fetch(API_URL("thoughts"), options)
-        .then(res => res.json())
+        .then(response => response.json())
         .then(data => {
             if(data.success) {
                 dispatch(thought.actions.setError(null));

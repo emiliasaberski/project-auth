@@ -5,7 +5,6 @@ import user from "reducers/user";
 import { API_URL } from "utils/urls";
 
 const Login = () => {
-
     const [username, setUsername] = useState("")
     const [password, setPassword] = useState("")
     const [mode, setMode] = useState("login")
@@ -22,14 +21,15 @@ const Login = () => {
         event.preventDefault();
         const options = {
             method: "POST",
-            headers: {"Content-Type": "application.json"},
+            headers: {
+                "Content-Type": "application.json"
+            },
             body: JSON.stringify({username: username, password: password})
         }
         fetch(API_URL(mode), options)
         .then(response => response.json())
         .then(data => {
             if(data.success) {
-                console.log(data)
                 dispatch(user.actions.setAccessToken(data.response.accessToken))
                 dispatch(user.actions.setUsername(data.response.username))
                 dispatch(user.actions.setUserId(data.response.id))
@@ -46,26 +46,30 @@ const Login = () => {
     return (
         <>
         <label htmlFor="register">Register</label>
-        <input type="radio" 
-        id="register" 
-        checked={mode === "register"}
-        onChange={() => setMode("register")}/>
+        <input 
+            type="radio" 
+            id="register" 
+            checked={mode === "register"}
+            onChange={() => setMode("register")}/>
         <label htmlFor="register">Login</label>
-        <input type="radio" 
-        id="login" 
-        checked={mode === "login"}
-        onChange={() => setMode("login")}/>
-            <form onSubmit={onFormSubmit}>
+        <input 
+            type="radio" 
+            id="login" 
+            checked={mode === "login"}
+            onChange={() => setMode("login")}/>
+        <form onSubmit={onFormSubmit}>
                 <label htmlFor="username">Username</label>
-                <input type="text" 
-                id="username" 
-                value={username}
-                onChange={event => setUsername(event.target.value)}/>
+                <input 
+                    type="text" 
+                    id="username" 
+                    value={username}
+                    onChange={event => setUsername(event.target.value)}/>
                 <label htmlFor="password">Password</label>
-                <input type="password" 
-                id="password" 
-                value={password}
-                onChange={event => setPassword(event.target.value)}/>
+                <input 
+                    type="password" 
+                    id="password" 
+                    value={password}
+                    onChange={event => setPassword(event.target.value)}/>
                 <button 
                 type="submit">SUBMIT</button>
             </form>
