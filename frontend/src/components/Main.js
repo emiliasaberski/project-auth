@@ -37,9 +37,18 @@ const Main = () => {
             }
         });
     })
+
+    const onLogoutButtonClick = () => {
+        dispatch(user.actions.setAccessToken(null));
+        dispatch(user.actions.setUsername(null));
+        dispatch(user.actions.setUserId(null));
+        dispatch(user.actions.setError(null));
+        dispatch(thoughts.actions.setItems([]));
+    }
     return (
         <>
-        <h2>THESE ARE THE THOUGHT OF {username}</h2>
+        <button type="button" onClick={onLogoutButtonClick}>LOGOUT</button>
+        {username ? (<h2>THESE ARE THE THOUGHTS OF {username.toUpperCase()}</h2>): ""}
         {thoughtItems.map(item => {
             return(<p key={item._id}>{item.message}</p>)
         })}

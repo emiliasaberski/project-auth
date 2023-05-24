@@ -5,12 +5,12 @@ import user from "reducers/user";
 import { API_URL } from "utils/urls";
 
 const Login = () => {
-    const [username, setUsername] = useState("")
-    const [password, setPassword] = useState("")
-    const [mode, setMode] = useState("login")
-    const dispatch = useDispatch()
-    const navigate = useNavigate()
-    const accessToken = useSelector(store => store.user.accessToken)
+    const [username, setUsername] = useState("");
+    const [password, setPassword] = useState("");
+    const [mode, setMode] = useState("login");
+    const dispatch = useDispatch();
+    const navigate = useNavigate();
+    const accessToken = useSelector(store => store.user.accessToken);
     useEffect(() => {
         if(accessToken){
             navigate("/")
@@ -22,25 +22,26 @@ const Login = () => {
         const options = {
             method: "POST",
             headers: {
-                "Content-Type": "application.json"
+                "Content-Type": "application/json"
             },
             body: JSON.stringify({username: username, password: password})
         }
         fetch(API_URL(mode), options)
-        .then(response => response.json())
-        .then(data => {
-            if(data.success) {
-                dispatch(user.actions.setAccessToken(data.response.accessToken))
-                dispatch(user.actions.setUsername(data.response.username))
-                dispatch(user.actions.setUserId(data.response.id))
-                dispatch(user.actions.setError(null))
-            } else {
-                dispatch(user.actions.setAccessToken(null));
-                dispatch(user.actions.setUsername(null));
-                dispatch(user.actions.setUserId(null));
-                dispatch(user.actions.setError(data.response))
-            }
-        })
+            .then(response => response.json())
+            .then(data => {
+                if(data.success) {
+                    console.log(data)
+                    dispatch(user.actions.setAccessToken(data.response.accessToken));
+                    dispatch(user.actions.setUsername(data.response.username));
+                    dispatch(user.actions.setUserId(data.response.id));
+                    dispatch(user.actions.setError(null));
+                } else {
+                    dispatch(user.actions.setAccessToken(null));
+                    dispatch(user.actions.setUsername(null));
+                    dispatch(user.actions.setUserId(null));
+                    dispatch(user.actions.setError(data.response))
+                }
+            })
     }
 
     return (
@@ -63,13 +64,13 @@ const Login = () => {
                     type="text" 
                     id="username" 
                     value={username}
-                    onChange={event => setUsername(event.target.value)}/>
+                    onChange={e => setUsername(e.target.value)}/>
                 <label htmlFor="password">Password</label>
                 <input 
                     type="password" 
                     id="password" 
                     value={password}
-                    onChange={event => setPassword(event.target.value)}/>
+                    onChange={e => setPassword(e.target.value)}/>
                 <button 
                 type="submit">SUBMIT</button>
             </form>
