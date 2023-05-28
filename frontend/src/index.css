@@ -1,13 +1,203 @@
 body {
   margin: 0;
   font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen",
-    "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue",
-    sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-}
+  "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue",
+  sans-serif;
+-webkit-font-smoothing: antialiased;
+-moz-osx-font-smoothing: grayscale;
+
+  }
+
+
+
+
 
 code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
     monospace;
+}
+ div#root {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 100vw;
+  background-color: #ab5bff;
+  background-image: url("https://images.unsplash.com/photo-1564769610726-59cead6a6f8f?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2149&q=80");
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: center;
+  cursor: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='40' height='48' viewport='0 0 100 100' style='fill:black;font-size:24px;'><text y='50%'>↖︎</text></svg>")
+  16 0,auto;
+ overflow-y: scroll;
+ padding-bottom: 35px;
+} 
+
+ html {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 100vw;
+  background-color: #ab5bff;
+  background-image: url("https://images.unsplash.com/photo-1564769610726-59cead6a6f8f?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2149&q=80");
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: center;
+  cursor: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='40' height='48' viewport='0 0 100 100' style='fill:black;font-size:24px;'><text y='50%'>↖︎</text></svg>")
+  16 0,
+auto;
+ overflow-y: scroll;
+ } 
+
+.login-box {
+  display: flex;
+  flex-direction: column;
+  width: 500px;
+  margin: 0 auto;
+  margin-top: 100px;
+  padding: 20px;
+  background-color: #ab5bff;
+  /* display: flex; */
+  /* flex-direction: column; */
+  box-shadow: 10px 10px rgb(0 0 0 / 96%);
+  font-family: monospace;
+  color: white;
+  text-align-last: center;
+}
+
+ .userpass-box {
+  /*background-color: rgb(212, 132, 102);*/
+  font-weight: bolder;
+}
+
+.log-reg {
+  display: flex;
+  justify-content: center;
+  font-style: italic;
+  font-size: large;
+  padding: 10px;
+}
+
+button {
+  color: black;
+  background-color: #ff3ef1;
+  text-shadow: 0 black;
+  border-radius: 11px;
+  border: none;
+  margin: 2px;
+  padding: 5px;
+  cursor: pointer;
+}
+
+input#username {
+  background-color: #ab5bff;
+  border: dashed;
+}
+input#password {
+  background-color: #ab5bff;
+  border: dashed;
+}
+
+h2 {
+  font-family: sans-serif;
+  text-align: center;
+}
+/* username */
+h1 {
+  font-family: sans-serif;
+  text-align: left;
+  margin-top: 3px;
+  font-size: 18px;
+  padding: 4px;
+}
+/* input message */
+p.thought-text{
+  text-align: center;
+}
+
+.Thoughts {
+  border: 0.3px solid black;
+  width: 300px;
+}
+
+button.submit-btn {
+  border: 1px solid black;
+  border-radius: 3px;
+}
+
+div.input-btn-box {
+  display: flex;
+  justify-content: center;
+  flex-direction: row;
+  padding: 15px;
+  gap: 5px;
+}
+
+div.likes {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  padding: 5px;
+  gap: 5px;
+}
+
+/* Not really sure why they get different names? */
+
+.no-like-btn{
+  transition: .2s ease-in-out;
+  }
+  .no-like-btn:hover {
+    transition: 0.35s ease-in-out;
+    transform: scale(1.4);
+  }
+.no-like-btn {
+  display: flex;
+  flex-direction: row;
+  width: 47px;
+  justify-content: center;
+  background: #c4b0403d;
+  border-radius: 40px;
+  cursor: pointer;
+  transition: .2s ease-in-out;
+  transition: 0.3s;
+}
+
+.like-btn{
+  transition: .2s ease-in-out;
+  }
+  .like-btn:hover {
+    transition: 0.35s ease-in-out;
+    transform: scale(1.4);
+  }
+
+.like-btn {
+  display: flex;
+  flex-direction: row;
+  width: 47px;
+  justify-content: center;
+  background: #c4b0403d;
+  border-radius: 40px;
+  cursor: pointer;
+  transition: .2s ease-in-out;
+  transition: 0.3s;
+}
+
+section {
+  display: flex;
+  flex-direction: column;
+  gap: 30px;
+}
+
+textarea {
+  border-radius: 3px;
+  /* padding: 5px; */
+  border: solid;
+}
+
+div.logout-btn {
+  display: flex;
+  align-self: flex-end;
+  padding: 5px;
 }

@@ -21,8 +21,7 @@ const user = createSlice({
         setError: (store, action) => {
             store.error = action.payload
         }
-        
     }
-})
+});
 
 export default user

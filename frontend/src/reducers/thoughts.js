@@ -1,20 +1,19 @@
 import { createSlice } from "@reduxjs/toolkit";
 
-const thought = createSlice({
+const thoughts = createSlice({
     name: "thoughts",
     initialState: {
         items: [],
-        error: null
+        error: null,
     },
     reducers: {
-        setItems: (store, action) => {
-            store.items = action.payload
-        },
         setError: (store, action) => {
             store.error = action.payload
-        }
-        
+        },
+        setItems: (store, action) => {
+            store.items = action.payload;
+        },
     }
-})
+});
 
-export default thought
+export default thoughts

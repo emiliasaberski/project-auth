@@ -3,17 +3,17 @@ import { Link } from "react-router-dom";
 
 const NotFound = () => {
 
-    return (
+    return(
         <>
-        <p>
-        <Link to="/login">Go to login</Link>
-        </p>
-        <p>
-        <Link to="/">Go to main</Link>
-        </p>
-         <p>I am the NotFound comp</p>
+            <p>
+                <Link to="/login">GO TO LOGIN</Link>
+            </p>
+            <p>
+                <Link to="/">GO TO MAIN</Link>
+            </p>
+            <p>Sorry, nothing here...</p>
         </>
-    )
+    );
 }
 
-export default NotFound
+export default NotFound;
